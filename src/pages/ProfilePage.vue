@@ -27,7 +27,16 @@ async function getProfileById() {
     <div class="container cover-img">
         <div class="row profile-bg">
             <div class="col-12">
-                <h1 class="text-center text-light text-shadow">{{ profile?.name }}</h1>
+                <div class="m-5 d-flex flex-column">
+                    <img :src="profile?.picture" :alt="profile?.name">
+                    <h1 class="text-center text-light text-shadow">{{ profile?.name }}</h1>
+                    <p>{{ profile?.class }}</p>
+                    <p>{{ profile?.bio }}</p>
+                    <h4 v-if="profile?.github"><i class="mdi mdi-github"></i>{{ profile.github }}</h4>
+                    <h4 v-if="profile?.linkedin" class="mb-5"><i class="mdi mdi-linkedin"></i>{{ profile.github }}</h4>
+                    <button class="btn btn-outline-primary">Edit</button>
+                </div>
+
             </div>
         </div>
     </div>
@@ -46,11 +55,11 @@ async function getProfileById() {
     align-items: center;
 }
 
-.text-shadow{
+.text-shadow {
     text-shadow: 1px 1px 3px black;
 }
 
-.profile-bg{
+.profile-bg {
     background-color: rgba(0, 0, 0, 0.595);
 }
 </style>

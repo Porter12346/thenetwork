@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink } from 'vue-router';
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
 
@@ -12,7 +13,9 @@ import Navbar from './components/Navbar.vue'
       <div class="row">
         <div class="col-2 bg-body-secondary"></div>
         <div class="col-10 d-flex justify-content-between bg-primary-subtle p-1">
-          <h1>Network</h1>
+          <RouterLink :to="{ name: 'Home' }">
+            <h1>Network</h1>
+          </RouterLink>
           <input type="text" class="m-2">
         </div>
       </div>

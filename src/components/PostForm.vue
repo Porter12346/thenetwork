@@ -13,15 +13,18 @@ async function makePost() {
     try {
         console.log(editablePostData.value);
         await postsService.makePost(editablePostData.value)
+        editablePostData.value = {body: '', imgUrl: ''}
     }
     catch (error) {
         Pop.error(error);
     }
 }
+
 const editablePostData = ref({
     body: '',
     imgUrl: '',
 })
+
 </script>
 
 
