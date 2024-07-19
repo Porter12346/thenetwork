@@ -7,14 +7,11 @@ import Navbar from './components/Navbar.vue'
 
 <template>
   <header>
-    <Navbar />
+    <Login />
   </header>
   <main>
     <router-view />
   </main>
-  <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
-  </footer>
 </template>
 
 <style lang="scss">

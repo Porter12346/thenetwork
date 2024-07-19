@@ -1,15 +1,40 @@
 <script setup>
+import { onMounted } from 'vue';
+import { postsService } from '../services/PostsService.js';
+import Pop from '../utils/Pop.js';
 
+onMounted(()=>{
+  getPosts()
+})
+
+async function getPosts() {
+  try {
+    await postsService.getPosts()
+  } catch (error) {
+    Pop.error(error)
+  }
+}
 </script>
 
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 card align-items-center shadow rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo"
-        class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2 bg-body-secondary"></div>
+      <div class="col-10 d-flex justify-content-between bg-primary-subtle p-1">
+        <h1>Network</h1>
+        <input type="text" class="m-2">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2 bg-body-secondary">
+        <p>profile info here</p>
+      </div>
+      <div class="col-8">
+        <p>posts go here</p>
+      </div>
+      <div class="col-2">
+        ads go here 🤮
+      </div>
     </div>
   </div>
 </template>
