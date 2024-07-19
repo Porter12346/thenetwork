@@ -5,8 +5,8 @@ export class Post{
         this.imgUrl =  data.imgUrl
         this.creator =  data.creator
         this.likes =  data.likes
-        this.createdAt =  data.createdAt
+        this.createdAt =  new Date(data.createdAt)
         this.likeIds =  data.likeIds
-        this.updatedAt =  data.updatedAt
+        this.updatedAt =  new Date(data.updatedAt)
     }
 }
