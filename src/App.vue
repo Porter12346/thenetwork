@@ -2,6 +2,7 @@
 import { RouterLink } from 'vue-router';
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
+import { computed } from 'vue';
 
 
 </script>
@@ -27,10 +28,12 @@ import Navbar from './components/Navbar.vue'
           <router-view />
         </div>
         <div class="col-2">
-          ads go here 🤮
+
+            <Ad/>
+          </div>
+
         </div>
       </div>
-    </div>
     <!-- <router-view /> -->
   </main>
 </template>

@@ -9,5 +9,7 @@ export const AppState = reactive({
   /** @type {import('./models/Post.js').Post[]} user info from the database*/
   activePosts: [],
   /** @type {import('./models/Account.js').Account} user info from the database*/
-  activeProfile: null
+  activeProfile: null,
+    /** @type {import('./models/Ad.js').Ad[]} user info from the database*/
+  Ads: []
 })
