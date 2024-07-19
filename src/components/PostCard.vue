@@ -8,7 +8,7 @@ const props= defineProps({
 
 
 <template>
-    <p>post name</p>
+    <p>{{ postProp?.body }}</p>
 </template>
 
 

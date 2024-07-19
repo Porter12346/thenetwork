@@ -1,9 +1,14 @@
 <script setup>
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import { postsService } from '../services/PostsService.js';
 import Pop from '../utils/Pop.js';
+import { AppState } from '../AppState.js';
 
-onMounted(()=>{
+const posts = computed(() => 
+  AppState.activePosts
+)
+
+onMounted(() => {
   getPosts()
 })
 
@@ -30,7 +35,9 @@ async function getPosts() {
         <p>profile info here</p>
       </div>
       <div class="col-8">
-        <p>posts go here</p>
+        <div v-for="post in posts" :key="post.id" class="row">
+          <PostCard :postProp="post"/>
+        </div>
       </div>
       <div class="col-2">
         ads go here 🤮
