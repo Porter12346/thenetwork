@@ -4,6 +4,12 @@ import { api } from "./AxiosService.js"
 
 class PostsService{
 
+  async makePost(editablePostData) {
+    console.log(editablePostData);
+    const response = await api.post('api/posts', editablePostData)
+    console.log(response);
+  }
+
   async getPosts() {
     const response = await api.get('api/posts')
     let posts = response.data.posts.map((postData)=>new Post(postData))
