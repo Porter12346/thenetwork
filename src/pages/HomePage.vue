@@ -1,8 +1,9 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
 import { postsService } from '../services/PostsService.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
+import { useRoute } from 'vue-router';
 
 const posts = computed(() =>
   AppState.activePosts
@@ -12,31 +13,51 @@ const account = computed(() =>
   AppState.account
 )
 
-
+let route = useRoute()
 
 onMounted(() => {
   getPosts()
-  setInterval(getPosts, 10000)
+  setInterval(getPosts, 5000)
 })
+
+onBeforeMount(()=>{
+  prepareUnload()
+})
+
+function getLiked() {
+  try {
+    if (account.value) {
+      postsService.getLiked(account.value.id)
+    }
+  }
+  catch (error) {
+    Pop.error(error)
+  }
+}
 
 async function getPosts() {
   try {
-    await postsService.getPosts()
+    if (route.path == '/') {
+      await postsService.getPosts()
+      getLiked()
+    }
   } catch (error) {
     Pop.error(error)
   }
 }
 
-
+function prepareUnload() {
+    postsService.prepareUnload()
+}
 
 </script>
 
 <template>
   <div v-if="account">
-  <PostForm :accountProp="account" />
-</div>
+    <PostForm :accountProp="account" />
+  </div>
   <div v-for="post in posts" :key="post.id" class="row mx-1">
-    <PostCard :postProp="post" />
+    <PostCard :postProp="post" :accountProp="account" />
   </div>
 </template>
 

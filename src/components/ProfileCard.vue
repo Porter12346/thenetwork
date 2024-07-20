@@ -2,7 +2,8 @@
 import { Account } from '../models/Account.js';
 
 const props = defineProps({
-    profileProp: { type: Account, required: true }
+    profileProp: { type: Account, required: true },
+    accountProp: { type: Account, required: true }
 })
 </script>
 
@@ -15,8 +16,12 @@ const props = defineProps({
     </div>
     <div v-if="profileProp?.id" class="card mb-3">
         <img :src="profileProp.coverImg" :alt="profileProp.name" class="img-fluid cover-img">
+
         <div class="d-flex align-items-center justify-content-between mt-2">
-            <img :src="profileProp.picture" :alt="profileProp.name" class="profile-img mx-2">
+            <div>
+                <img :src="profileProp.picture" :alt="profileProp.name" class="profile-img mx-2">
+                <i v-if="profileProp.id == accountProp.id" class="mdi mdi-pencil fs-2"></i>
+            </div>
             <div class="fs-1">
                 <i v-if="profileProp.github" class="mdi mdi-github m-3"></i>
                 <i v-if="profileProp.linkedin" class="mdi mdi-linkedin m-3"></i>

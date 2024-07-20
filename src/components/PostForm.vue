@@ -30,7 +30,7 @@ const editablePostData = ref({
 
 <template>
     <form @submit.prevent="makePost()" class="card my-3 d-flex">
-        <div class="container-fluid">
+        <div v-if="accountProp" class="container-fluid">
             <div class="row">
                 <div class="col-1">
                     <img :src="accountProp.picture" :alt="accountProp.name" class="profile-img m-2">

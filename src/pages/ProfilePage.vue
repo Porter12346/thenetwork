@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed, onBeforeUnmount, onMounted } from 'vue';
 import { profilesService } from '../services/ProfilesService.js';
 import { useRoute } from 'vue-router';
 import Pop from '../utils/Pop.js';
@@ -11,7 +11,14 @@ const profile = computed(() => AppState.activeProfile)
 const account = computed(() => AppState.account)
 const posts = computed(() => AppState.activePosts)
 
-onMounted(() => {getProfileById(); getPostsById()})
+onMounted(() => {
+    getProfileById(); getPostsById()
+    setInterval(getPostsById, 5000)
+})
+
+onBeforeUnmount(()=>{
+    prepareUnload()
+})
 
 async function getProfileById() {
     try {
@@ -25,20 +32,27 @@ async function getProfileById() {
 
 async function getPostsById() {
     try {
-        await postsService.getPostsById(route.params.profileId)
+        if (route.path != '/')
+            await postsService.getPostsById(route.params.profileId)
     }
     catch (error) {
         Pop.error(error);
     }
 }
+
+function prepareUnload() {
+    postsService.prepareUnload()
+}
+
 </script>
 
 
 <template>
     <ProfileCard :profileProp="profile" />
+    <PostForm v-if="account?.id == profile.id" :accountProp="profile" />
     <div class="container">
         <div v-for="post in posts" :key="post.id" class="row mx-1">
-            <PostCard :postProp="post" />
+            <PostCard :postProp="post" :accountProp="account" />
         </div>
     </div>
 </template>
