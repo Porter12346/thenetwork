@@ -2,8 +2,10 @@
 import { ref } from 'vue';
 import { accountService } from '../services/AccountService.js';
 import Pop from '../utils/Pop.js';
+import { profilesService } from '../services/ProfilesService.js';
+import { useRoute } from 'vue-router';
 
-
+const route = useRoute()
 const editableAccountData = ref({
     name: '',
     picture: '',
@@ -15,7 +17,8 @@ const editableAccountData = ref({
 
 async function updateProfile() {
     try {
-        accountService.updateAccount(editableAccountData)
+        await accountService.updateAccount(editableAccountData)
+        await profilesService.getProfileById(route.params.profileId)
     }
     catch (error) {
         Pop.error(error);
