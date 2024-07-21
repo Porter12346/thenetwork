@@ -37,5 +37,6 @@ async function logout() {
   aspect-ratio: 1/1;
   border-radius: 50%;
   object-fit: cover;
+  width: 100%
 }
 </style>

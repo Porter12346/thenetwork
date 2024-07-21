@@ -20,7 +20,10 @@ const props = defineProps({
         <div class="d-flex align-items-center justify-content-between mt-2">
             <div>
                 <img :src="profileProp.picture" :alt="profileProp.name" class="profile-img mx-2">
-                <i v-if="profileProp.id == accountProp.id" class="mdi mdi-pencil fs-2"></i>
+                <button v-if="profileProp?.id == accountProp?.id" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i  class="mdi mdi-pencil fs-6"></i>
+                </button>
+
             </div>
             <div class="fs-1">
                 <i v-if="profileProp.github" class="mdi mdi-github m-3"></i>
@@ -33,7 +36,6 @@ const props = defineProps({
         </div>
         <p class="card-text m-3">{{ profileProp.bio }}</p>
     </div>
-
 </template>
 
 
