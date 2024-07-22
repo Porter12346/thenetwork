@@ -20,17 +20,23 @@ const props = defineProps({
         <div class="d-flex align-items-center justify-content-between mt-2">
             <div>
                 <img :src="profileProp.picture" :alt="profileProp.name" class="profile-img mx-2">
-                <button v-if="profileProp?.id == accountProp?.id" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i  class="mdi mdi-pencil fs-6"></i>
+                <button v-if="profileProp?.id == accountProp?.id" type="button" class="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="mdi mdi-pencil fs-6"></i>
                 </button>
 
             </div>
             <div class="fs-1">
-                <i v-if="profileProp.github" class="mdi mdi-github m-3"></i>
-                <i v-if="profileProp.linkedin" class="mdi mdi-linkedin m-3"></i>
+                <a v-if="profileProp.github" :href="profileProp.github" target="_blank">
+                    <i class="mdi mdi-github"></i>
+                </a>
+                <a v-if="profileProp.linkedin" :href="profileProp.linkedin" target="_blank">
+                    <i class="mdi mdi-linkedin m-3"></i>
+                </a>
             </div>
         </div>
         <div class="mx-3 my-2">
+            <i v-if="profileProp.graduated" class="mdi mdi-school"></i>
             <h5 class="m-0 text-black-50">{{ profileProp.class }}</h5>
             <h2 class="m-0">{{ profileProp.name }}</h2>
         </div>
