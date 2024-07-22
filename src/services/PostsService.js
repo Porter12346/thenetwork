@@ -3,6 +3,11 @@ import { Post } from "../models/Post.js";
 import { api } from "./AxiosService.js"
 
 class PostsService {
+
+    updateQuery(query) {
+        AppState.activePosts = null
+        AppState.query = query
+    }
     prevPage() {
         AppState.activePosts = null
         AppState.currentPage--
@@ -48,7 +53,7 @@ class PostsService {
 
     async getPostsById(profileId, page) {
         // AppState.activePosts = null
-        const response = await api.get(`api/posts?page=${page.value}&creatorId=${profileId}`)
+        const response = await api.get(`api/posts?page=${page.value}&creatorId=${profileId}&query=${AppState.query}`)
         const posts = response.data.posts.map((postData) => new Post(postData))
         if (AppState.account) { this.getLiked(AppState.account.id, posts) }
         AppState.activePosts = posts
@@ -62,7 +67,7 @@ class PostsService {
     }
 
     async getPosts(page) {
-        const response = await api.get(`api/posts?page=${page.value}`)
+        const response = await api.get(`api/posts?page=${page.value}&query=${AppState.query}`)
         let posts = response.data.posts.map((postData) => new Post(postData, AppState?.account?.id))
         console.log(posts);
         if (AppState.account) { this.getLiked(AppState.account.id, posts) }

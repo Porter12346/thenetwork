@@ -2,8 +2,17 @@
 import { RouterLink } from 'vue-router';
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+import { postsService } from './services/PostsService.js';
 
+const editableQuery = ref({
+  query: ''
+})
+
+
+async function updateQuery() {
+  postsService.updateQuery(editableQuery.value.query)
+}
 
 </script>
 
@@ -17,7 +26,13 @@ import { computed } from 'vue';
           <RouterLink :to="{ name: 'Home' }">
             <h1>Network</h1>
           </RouterLink>
-          <input type="text" class="m-2">
+          <div>
+          <form @submit.prevent="updateQuery()" class="input-group my-2">
+            <input v-model="editableQuery.query" type="text" class="form-control" placeholder="Search"
+              aria-label="Search Bar" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">submit</button>
+          </form>
+        </div>
         </div>
       </div>
       <div class="row">
@@ -29,11 +44,11 @@ import { computed } from 'vue';
         </div>
         <div class="col-2">
 
-            <Ad/>
-          </div>
-
+          <Ad />
         </div>
+
       </div>
+    </div>
     <!-- <router-view /> -->
   </main>
 </template>

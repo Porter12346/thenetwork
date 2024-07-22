@@ -13,5 +13,6 @@ export const AppState = reactive({
     /** @type {import('./models/Ad.js').Ad[]} user info from the database*/
   Ads: [],
   currentPage:  1,
-  totalPages: 0
+  totalPages: 0,
+  query: ''
 })
