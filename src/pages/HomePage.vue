@@ -13,6 +13,9 @@ const account = computed(() =>
   AppState.account
 )
 
+const currentPage = computed(() => AppState.currentPage)
+const totalPages = computed(()=> AppState.totalPages)
+
 let route = useRoute()
 
 onMounted(() => {
@@ -38,7 +41,7 @@ function getLiked() {
 async function getPosts() {
   try {
     if (route.path == '/') {
-      await postsService.getPosts()
+      await postsService.getPosts(currentPage)
       getLiked()
     }
   } catch (error) {
@@ -59,7 +62,8 @@ function prepareUnload() {
   <div v-for="post in posts" :key="post.id" class="row mx-1">
     <PostCard :postProp="post" :accountProp="account" />
   </div>
-</template>
+  <PageButtons :currentPageProp='currentPage' :totalPagesProp="totalPages"/>
+  </template>
 
 <style scoped lang="scss">
 .home {

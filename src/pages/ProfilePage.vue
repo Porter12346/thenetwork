@@ -12,9 +12,13 @@ const route = useRoute()
 const profile = computed(() => AppState.activeProfile)
 const account = computed(() => AppState.account)
 const posts = computed(() => AppState.activePosts)
+const currentPage = computed(() => AppState.currentPage)
+const totalPages = computed(() => AppState.totalPages)
 
 onMounted(() => {
-    getProfileById(); getPostsById()
+    setPage()
+    getProfileById();
+    getPostsById()
     setInterval(getPostsById, 5000)
 })
 
@@ -40,7 +44,7 @@ watchEffect(() => {
 async function getPostsById() {
     try {
         if (route.path != '/')
-            await postsService.getPostsById(route.params.profileId)
+            await postsService.getPostsById(route.params.profileId, currentPage)
     }
     catch (error) {
         Pop.error(error);
@@ -53,6 +57,10 @@ function prepareUnload() {
 
 
 
+
+function setPage() {
+    postsService.setPage()
+}
 </script>
 
 
@@ -83,6 +91,7 @@ function prepareUnload() {
             </div>
         </div>
     </div>
+    <PageButtons />
 </template>
 
 

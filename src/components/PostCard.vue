@@ -12,6 +12,16 @@ const props = defineProps({
     accountProp: { type: Account, required: true }
 })
 
+async function deletePost() {
+    try {
+        await postsService.deletePost(props.postProp.id)
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+
+}
+
 // async function checkLiked(post) {
 //     try {
 //         await postsService.checkLiked(post)
@@ -44,7 +54,10 @@ const props = defineProps({
         <p class="card-text">{{ postProp?.body }}</p>
         <p class="card-text"><small class="text-muted">Posted {{ format(postProp.createdAt) }}</small></p>
         <img v-if="postProp.imgUrl" :src="postProp.imgUrl" class="card-img-top" alt="post Image">
-        <div class="card-body d-flex justify-content-end">
+        <div class="card-body d-flex justify-content-between">
+            <button @click="deletePost()" v-if="postProp.creator?.id == accountProp?.id" class="btn btn-danger"><i
+                    class="mdi mdi-trash-can"></i></button>
+            <div v-else></div>
             <LikeButton :postProp='postProp' />
         </div>
     </div>
