@@ -91,7 +91,7 @@ function setPage() {
             </div>
         </div>
     </div>
-    <PageButtons />
+    <PageButtons :currentPageProp='currentPage' :totalPagesProp="totalPages"/>
 </template>
 
 
