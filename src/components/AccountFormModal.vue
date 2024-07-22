@@ -14,13 +14,13 @@ const props = defineProps({
 })
 
 const editableAccountData = ref({
-    name: props.profileProp.name,
-    picture: props.profileProp.picture,
-    coverImg: props.profileProp.coverImg,
-    linkedin: props.profileProp.linkedin,
-    github: props.profileProp.github,
-    bio: props.profileProp.bio,
-    class: props.profileProp.class,
+    name: props.profileProp?.name,
+    picture: props.profileProp?.picture,
+    coverImg: props.profileProp?.coverImg,
+    linkedin: props.profileProp?.linkedin,
+    github: props.profileProp?.github,
+    bio: props.profileProp?.bio,
+    class: props.profileProp?.class,
     graduated: false
 })
 

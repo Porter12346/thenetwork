@@ -26,10 +26,10 @@ async function logout() {
         <h4>{{ account?.class }}</h4>
         <h1 class="text-center">{{ account?.name }}</h1>
       </RouterLink>
-      <a v-if="account.github" :href="account.github" target="_blank">
+      <a v-if="account?.github" :href="account?.github" target="_blank">
         <i class="mdi mdi-github fs-2"></i>
       </a>
-      <a v-if="account.linkedin" :href="account.linkedin" target="_blank">
+      <a v-if="account?.linkedin" :href="account?.linkedin" target="_blank">
         <i class="mdi mdi-linkedin fs-2"></i>
       </a>
       <button @click="logout" class="btn btn-danger mt-5"><i class="mdi mdi-logout"></i></button>
